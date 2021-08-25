@@ -1,6 +1,7 @@
 const initialState = {
     addUserLoader: false,
     getUserAuthLoader: false,
+    loginUserLoader: false,
     userAuth: {},
     user: {},
 };
@@ -15,6 +16,20 @@ const userReducer = (state = initialState, action: any) => {
         return {
             ...state,
             addUserLoader: false
+        };
+    }
+    if (action.type === 'LOGIN_USER_REQ') {
+        return {
+            ...state,
+            loginUserLoader: true,
+            userAuth: {}
+        };
+    }
+    if (action.type === 'LOGIN_USER_RES') {
+        return {
+            ...state,
+            loginUserLoader: false,
+            userAuth: action.payload
         };
     }
     if (action.type === 'SET_CURRENT_USER_REQ') {

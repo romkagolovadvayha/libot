@@ -1,7 +1,8 @@
-import {addUser, getCurrentUser, setCurrentUser} from './userActions';
+import {addUser, getCurrentUser, setCurrentUser, loginUser} from './userActions';
 
 export {
     addUser,
     getCurrentUser,
-    setCurrentUser
+    setCurrentUser,
+    loginUser
 };

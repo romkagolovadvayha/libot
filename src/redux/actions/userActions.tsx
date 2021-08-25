@@ -43,3 +43,18 @@ export const setCurrentUser = (user: any) => async (
     }
     return false;
 };
+
+export const loginUser = (login: string, password: string, recaptcha: string) => async (
+    dispatch: any
+) => {
+    dispatch({ type: 'LOGIN_USER_REQ' });
+
+    try {
+        const req = await api.place.user.login(login, password, recaptcha);
+        dispatch({ type: 'LOGIN_USER_RES', payload: req.data });
+        return req.data;
+    } catch (error: any) {
+        dispatch({ type: 'LOGIN_USER_FAIL', payload: error.message });
+    }
+    return false;
+};

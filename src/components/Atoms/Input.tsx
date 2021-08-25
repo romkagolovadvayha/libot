@@ -9,10 +9,11 @@ interface Props {
     labelText?: string;
     errorText?: string;
     autocomplete?: string;
+    touched?: boolean;
 }
 
 export const Input = (props: Props) => {
-    const {handleChange, value, type, name, placeholder, labelText, errorText, autocomplete} = props;
+    const {handleChange, value, type, name, placeholder, labelText, errorText, autocomplete, touched} = props;
 
     return (
         <div className="input">
@@ -24,7 +25,7 @@ export const Input = (props: Props) => {
                 placeholder={placeholder}
                 autoComplete={autocomplete}
                 name={name}/>
-            {errorText && errorText.length > 0 && <small>{errorText}</small>}
+            {errorText && touched && errorText.length > 0 && <small>{errorText}</small>}
         </div>
     );
 };

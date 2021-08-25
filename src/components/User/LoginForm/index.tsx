@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {addUser, setCurrentUser} from '../../../redux/actions';
+import {loginUser} from '../../../redux/actions';
 import {Formik} from 'formik';
 import ValidateForm from './ValidateForm';
 import {Input, Button} from '../../Atoms';
 import {config} from "../../../config";
-import { ReCaptcha } from 'react-recaptcha-v3'
+import {ReCaptcha} from 'react-recaptcha-v3'
+import {Redirect} from "react-router";
 
 interface Props {
-    addUser: any;
-    setCurrentUser: any;
-    addUserLoader: boolean;
+    loginUser: any;
+    loginUserLoader: boolean;
 }
 
 interface State {
@@ -18,7 +18,7 @@ interface State {
     complete: boolean;
 }
 
-class Signup extends Component<Props, State> {
+class LoginForm extends Component<Props, State> {
 
     constructor(props: Props) {
         super(props);
@@ -29,9 +29,9 @@ class Signup extends Component<Props, State> {
     }
 
     handlerSubmit = (values: any, setSubmitting: any) => {
-        const {addUser, setCurrentUser} = this.props;
+        const {loginUser} = this.props;
         this.setState({error: ''});
-        addUser(values.login, values.password, values.fullname, values.email, values.recaptcha).then((data: any) => {
+        loginUser(values.login, values.password, values.recaptcha).then((data: any) => {
             setTimeout(() => {
                 setSubmitting(false);
             }, 400)
@@ -39,7 +39,6 @@ class Signup extends Component<Props, State> {
                 this.setState({error: data.error});
             } else {
                 localStorage.setItem("token", data.token);
-                setCurrentUser(data.user);
                 this.setState({complete: true});
             }
         });
@@ -55,13 +54,16 @@ class Signup extends Component<Props, State> {
     };
 
     render() {
-        const {addUserLoader} = this.props;
+        const {loginUserLoader} = this.props;
         const {complete, error} = this.state;
+        if (complete) {
+            return <Redirect to='/'/>;
+        }
         return (
             <>
-                {addUserLoader && <div>Загрузка...</div>}
+                {loginUserLoader && <div>Загрузка...</div>}
                 {!complete && <Formik
-                    initialValues={{email: '', login: '', password: '', fullname: '', recaptcha: ''}}
+                    initialValues={{login: '', password: '', recaptcha: ''}}
                     validate={values => this.handlerValidate(values)}
                     onSubmit={(values, {setSubmitting}) => this.handlerSubmit(values, setSubmitting)}
                 >
@@ -69,8 +71,6 @@ class Signup extends Component<Props, State> {
                         <form onSubmit={handleSubmit}>
                             {error && error.length > 0 && <div>{error}</div>}
                             <Input type="text" autocomplete="off" name="login" handleChange={handleChange} value={values.login} errorText={errors.login} touched={touched.login}/>
-                            <Input type="email" name="email" handleChange={handleChange} value={values.email} errorText={errors.email} touched={touched.email}/>
-                            <Input type="text" autocomplete="off" name="fullname" handleChange={handleChange} value={values.fullname} errorText={errors.fullname} touched={touched.fullname}/>
                             <Input type="password" autocomplete="off" name="password" handleChange={handleChange} value={values.password} errorText={errors.password} touched={touched.password}/>
                             <ReCaptcha
                                 sitekey={config.reCaptchaKey}
@@ -81,11 +81,10 @@ class Signup extends Component<Props, State> {
                             && touched.recaptcha && (
                                 <div>{errors.recaptcha}</div>
                             )}
-                            <Button disabled={isSubmitting}>Регистрация</Button>
+                            <Button disabled={isSubmitting}>Вход</Button>
                         </form>
                     )}
                 </Formik>}
-                {complete && <div>Регистрация пройдена!</div>}
             </>
         )
     }
@@ -94,12 +93,11 @@ class Signup extends Component<Props, State> {
 const mapStateToProps = (state: any) => {
     return {
         state,
-        addUserLoader: state.user.addUserLoader,
+        loginUserLoader: state.user.loginUserLoader,
     };
 };
 const mapDispatchToProps = (dispatch: any) => ({
     dispatch,
-    addUser: (login: string, password: string, fullname: string, email: string, recaptcha: string) => dispatch(addUser(login, password, fullname, email, recaptcha)),
-    setCurrentUser: (user: any) => dispatch(setCurrentUser(user)),
+    loginUser: (login: string, password: string, recaptcha: string) => dispatch(loginUser(login, password, recaptcha)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
