@@ -3,6 +3,7 @@ import {RouteComponentProps} from 'react-router-dom';
 
 import {Home} from './Home';
 import {Registration, Login} from './Auth';
+import Logout from './Auth/Logout';
 
 interface Route {
     link: string;
@@ -26,6 +27,13 @@ export const Pages: Array<Route> = [
         code: 'registration',
         isHeaderMenu: true,
         component: Registration,
+    },
+    {
+        link: '/logout',
+        title: 'Выход',
+        code: 'logout',
+        isHeaderMenu: true,
+        component: Logout,
     },
     {
         link: '/login',

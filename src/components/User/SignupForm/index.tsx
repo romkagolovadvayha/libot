@@ -18,7 +18,7 @@ interface State {
     complete: boolean;
 }
 
-class Signup extends Component<Props, State> {
+class SignupForm extends Component<Props, State> {
 
     constructor(props: Props) {
         super(props);
@@ -102,4 +102,4 @@ const mapDispatchToProps = (dispatch: any) => ({
     addUser: (login: string, password: string, fullname: string, email: string, recaptcha: string) => dispatch(addUser(login, password, fullname, email, recaptcha)),
     setCurrentUser: (user: any) => dispatch(setCurrentUser(user)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);

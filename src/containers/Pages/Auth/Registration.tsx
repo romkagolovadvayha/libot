@@ -1,14 +1,14 @@
 import React from 'react';
-import Signup from '../../../components/User/Signup'
-import {AuthLayout} from '../../Layouts';
+import SignupForm from '../../../components/User/SignupForm'
+import {CabinetLayout} from '../../Layouts';
 
 export function Registration() {
     return (
-        <AuthLayout>
+        <CabinetLayout authorization={false} notAuthorize={true}>
             <section className="content">
                 <h1>Reg page</h1>
-                <Signup/>
+                <SignupForm/>
             </section>
-        </AuthLayout>
+        </CabinetLayout>
     );
 }

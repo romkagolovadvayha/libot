@@ -10,30 +10,34 @@ interface Props {
     getUserAuthLoader: boolean;
     userAuth: any;
     requared: boolean;
+    notAuthorize: boolean;
 }
 
 function Authorization(props: Props) {
     const { children, getCurrentUser, getUserAuthLoader, userAuth, requared } = props;
-    const [redirect, setRedirect] = useState('');
-    useEffect(() => {
-        if (!ObjectHelper.isEmpty(userAuth)) {
-            checkAuthorization(userAuth.status, requared);
-        }
-        if (!getUserAuthLoader && ObjectHelper.isEmpty(userAuth)) {
-            getCurrentUser().then((data: any) => {
-                checkAuthorization(data.status, requared);
-            });
-        }
-    });
-
-    function checkAuthorization(status: number, redirect?: boolean) {
-        if (redirect && status !== 200) {
-            setRedirect('/login');
+    if (!ObjectHelper.isEmpty(userAuth)) {
+        const rCheckAuth = checkAuthorization(userAuth.status, requared);
+        if (rCheckAuth !== false) {
+            return rCheckAuth;
         }
     }
+    if (!getUserAuthLoader && ObjectHelper.isEmpty(userAuth)) {
+        getCurrentUser().then((data: any) => {
+            const rCheckAuth = checkAuthorization(data.status, requared);
+            if (rCheckAuth !== false) {
+                return rCheckAuth;
+            }
+        });
+    }
 
-    if (redirect.length > 0) {
-        return <Redirect to={redirect} />;
+    function checkAuthorization(status: number, redirect?: boolean) {
+        const {  notAuthorize } = props;
+        if (redirect && status !== 200) {
+            return <Redirect to="/login" />;
+        } else if (status === 200 && notAuthorize) {
+            return <Redirect to="/" />;
+        }
+        return false;
     }
     return (
         <>

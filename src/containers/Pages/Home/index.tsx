@@ -3,7 +3,7 @@ import {CabinetLayout} from '../../Layouts';
 
 export function Home() {
     return (
-        <CabinetLayout>
+        <CabinetLayout authorization={true} notAuthorize={false}>
             <section className="content">
                 <h1>Home page</h1>
             </section>
