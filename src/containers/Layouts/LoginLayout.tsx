@@ -10,15 +10,16 @@ interface Props {
     notAuthorize: boolean;
 }
 
-export function CabinetLayout(props: Props) {
+export function LoginLayout(props: Props) {
     const { children, authorization, notAuthorize } = props;
+    useEffect(() => {
+        loadReCaptcha(config.reCaptchaKey);
+    });
     return (
         <Authorization requared={authorization} notAuthorize={notAuthorize}>
-            <Header/>
             <div className="content">
                 {children}
             </div>
-            <Footer/>
         </Authorization>
     );
 }

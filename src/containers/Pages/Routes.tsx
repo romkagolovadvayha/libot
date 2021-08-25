@@ -1,4 +1,4 @@
-import {ComponentType} from 'react';
+import React, {ComponentType} from 'react';
 import {RouteComponentProps} from 'react-router-dom';
 
 import {Home} from './Home';
@@ -9,7 +9,6 @@ interface Route {
     link: string;
     title: string;
     code: string;
-    isHeaderMenu: boolean;
     component: ComponentType<RouteComponentProps> | ComponentType;
 }
 
@@ -18,28 +17,32 @@ export const Pages: Array<Route> = [
         link: '/',
         title: 'Главная страница',
         code: 'home',
-        isHeaderMenu: true,
         component: Home,
     },
     {
         link: '/registration',
         title: 'Регистрация',
         code: 'registration',
-        isHeaderMenu: true,
         component: Registration,
     },
     {
         link: '/logout',
         title: 'Выход',
         code: 'logout',
-        isHeaderMenu: true,
         component: Logout,
     },
     {
         link: '/login',
         title: 'Авторизация',
         code: 'login',
-        isHeaderMenu: false,
         component: Login,
     },
 ];
+
+export function getPage(code: string) {
+    return Pages.find(page => {
+        if (page.code === code) {
+            return page;
+        }
+    });
+}

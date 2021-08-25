@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {getCurrentUser} from "../../redux/actions";
 import ObjectHelper from "../../helpers/ObjectHelper";
 import {connect} from "react-redux";
-import { Redirect } from "react-router";
+import {Redirect} from "react-router";
 
 interface Props {
     children: any;
@@ -14,30 +14,44 @@ interface Props {
 }
 
 function Authorization(props: Props) {
-    const { children, getCurrentUser, getUserAuthLoader, userAuth, requared } = props;
-    if (!ObjectHelper.isEmpty(userAuth)) {
-        const rCheckAuth = checkAuthorization(userAuth.status, requared);
-        if (rCheckAuth !== false) {
-            return rCheckAuth;
-        }
-    }
-    if (!getUserAuthLoader && ObjectHelper.isEmpty(userAuth)) {
-        getCurrentUser().then((data: any) => {
-            const rCheckAuth = checkAuthorization(data.status, requared);
-            if (rCheckAuth !== false) {
-                return rCheckAuth;
+    const {children, getCurrentUser, getUserAuthLoader, userAuth, requared} = props;
+    const [redirect, setRedirect] = useState('');
+    useEffect(() => {
+        let cleanupFunction = false;
+        if (!cleanupFunction) {
+            if (!ObjectHelper.isEmpty(userAuth)) {
+                const rCheckAuth = checkAuthorization(userAuth.status, requared);
+                if (rCheckAuth !== false) {
+                    setRedirect(rCheckAuth);
+                }
             }
-        });
-    }
+            if (!getUserAuthLoader && ObjectHelper.isEmpty(userAuth)) {
+                getCurrentUser().then((data: any) => {
+                    const rCheckAuth = checkAuthorization(data.status, requared);
+                    if (rCheckAuth !== false) {
+                        setRedirect(rCheckAuth);
+                    }
+                });
+            }
+        }
+        // функция очистки useEffect
+        return () => {
+            cleanupFunction = true
+        };
+    }, []);
 
     function checkAuthorization(status: number, redirect?: boolean) {
-        const {  notAuthorize } = props;
+        const {notAuthorize} = props;
         if (redirect && status !== 200) {
-            return <Redirect to="/login" />;
+            return "/login";
         } else if (status === 200 && notAuthorize) {
-            return <Redirect to="/" />;
+            return "/";
         }
         return false;
+    }
+
+    if (redirect.length > 0) {
+        return <Redirect to={redirect}/>;
     }
     return (
         <>
@@ -45,6 +59,7 @@ function Authorization(props: Props) {
         </>
     );
 }
+
 const mapStateToProps = (state: any) => {
     return {
         state,

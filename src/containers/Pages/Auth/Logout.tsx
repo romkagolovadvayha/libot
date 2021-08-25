@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Redirect} from "react-router";
 import {setCurrentUser} from "../../../redux/actions";
 import {connect} from "react-redux";
@@ -8,9 +8,22 @@ interface Props {
 }
 
 function Logout(props: Props) {
-    localStorage.removeItem("token");
-    props.setCurrentUser({});
-    return <Redirect to="/login" />;
+    const [redirect, setRedirect] = useState('');
+    useEffect(() => {
+        let cleanupFunction = false;
+        if (!cleanupFunction) {
+            localStorage.removeItem("token");
+            props.setCurrentUser({});
+            setRedirect('/login');
+        }
+        // функция очистки useEffect
+        return () => {cleanupFunction = true};
+    }, []);
+
+    if (redirect.length > 0) {
+        return <Redirect to={redirect}/>;
+    }
+    return <></>;
 }
 
 const mapDispatchToProps = (dispatch: any) => ({
