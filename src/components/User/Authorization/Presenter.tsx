@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import {getCurrentUser} from "../../redux/actions";
-import ObjectHelper from "../../helpers/ObjectHelper";
-import {connect} from "react-redux";
+import React, {useEffect, useState} from 'react';
+import ObjectHelper from "../../../helpers/ObjectHelper";
 import {Redirect} from "react-router";
+import HasAutorize from "../HasAutorize";
 
 interface Props {
     children: any;
@@ -13,7 +12,7 @@ interface Props {
     notAuthorize: boolean;
 }
 
-function Authorization(props: Props) {
+export function Presenter(props: Props) {
     const {children, getCurrentUser, getUserAuthLoader, userAuth, requared} = props;
     const [redirect, setRedirect] = useState('');
     useEffect(() => {
@@ -53,23 +52,13 @@ function Authorization(props: Props) {
     if (redirect.length > 0) {
         return <Redirect to={redirect}/>;
     }
+    const {notAuthorize} = props;
+    if (!HasAutorize.execute(userAuth) && !notAuthorize) {
+        return <>Загрузка...</>
+    }
     return (
         <>
             {children}
         </>
     );
 }
-
-const mapStateToProps = (state: any) => {
-    return {
-        state,
-        getUserAuthLoader: state.user.getUserAuthLoader,
-        userAuth: state.user.userAuth,
-    };
-};
-const mapDispatchToProps = (dispatch: any) => ({
-    dispatch,
-    getCurrentUser: () => dispatch(getCurrentUser()),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(Authorization);
-

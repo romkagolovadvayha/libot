@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 
 export function Registration() {
     return (
-        <LoginLayout authorization={false} notAuthorize={true}>
+        <LoginLayout title="Регистрация" authorization={false} notAuthorize={true}>
             <section className="content">
                 <h1>Reg page</h1>
                 <SignupForm/>

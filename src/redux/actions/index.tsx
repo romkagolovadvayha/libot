@@ -4,5 +4,5 @@ export {
     addUser,
     getCurrentUser,
     setCurrentUser,
-    loginUser
+    loginUser,
 };

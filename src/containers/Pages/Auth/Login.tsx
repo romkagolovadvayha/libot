@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 
 export function Login() {
     return (
-        <LoginLayout authorization={false} notAuthorize={true}>
+        <LoginLayout title="Авторизация" authorization={false} notAuthorize={true}>
             <section className="content">
                 <h1>Login page</h1>
                 <LoginForm/>
@@ -18,4 +18,3 @@ export function Login() {
         </LoginLayout>
     );
 }
-// попробовать токен в стейт засунуть
