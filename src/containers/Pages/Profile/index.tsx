@@ -1,11 +1,11 @@
 import React from 'react';
 import {CabinetLayout} from '../../Layouts';
 
-export function Home() {
+export function Profile() {
     return (
-        <CabinetLayout title="Личный кабинет" authorization={true} notAuthorize={false} sidebar={true}>
+        <CabinetLayout title="Мой профиль" authorization={true} notAuthorize={false}>
             <section className="content">
-                <h1>Home page</h1>
+                <h1>профиль page</h1>
             </section>
         </CabinetLayout>
     );

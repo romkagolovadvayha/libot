@@ -2,8 +2,9 @@ import React from 'react';
 import styled from "@emotion/styled";
 
 const ST = {
-    Container: styled.footer`
-        background: #fff;
+    Container: styled.aside`
+      grid-area: sidebar;
+      border-left: 1px solid #d4d4d4;
     `,
     Child: styled.div`
       background: #fff;

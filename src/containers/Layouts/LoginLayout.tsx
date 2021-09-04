@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import Authorization from '../../components/User/Authorization';
 import {loadReCaptcha} from "react-recaptcha-v3";
 import {config} from "../../config";
+import "typeface-roboto";
 
 interface Props {
     children: any;
