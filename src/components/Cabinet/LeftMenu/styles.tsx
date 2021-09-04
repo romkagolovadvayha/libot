@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from "@emotion/styled";
-import {css} from "@emotion/react";
+import Colors from '../../styles/atoms/colors';
 
 const width = '100px';
 const height = '100px';
 const iconWidth = '30px';
 const navColor = '#f7f7f7';
 const navBorderColor = '#d4d4d4';
-const navColorActive = '#267edb';
+const navColorActive = Colors.Tea;
 const navColorHover = '#c4e2ff';
 const navBorderColorActive = '#002856';
 

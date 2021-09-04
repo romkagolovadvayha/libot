@@ -1,4 +1,5 @@
 import React from 'react';
+import Colors from '../atoms/colors';
 import styled from "@emotion/styled";
 
 const Table = {
@@ -19,7 +20,7 @@ const Table = {
     HeaderItem: styled.th`
       position: sticky;
       top: 0;
-      background: #267edb;
+      background: ${Colors.Tea};
       text-align: left;
       font-weight: normal;
       font-size: 1.1rem;

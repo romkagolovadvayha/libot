@@ -1,6 +1,6 @@
 import React from 'react';
 import ST from './styles';
-import Table from '../../../styles/table';
+import Table from '../../../styles/components/table';
 
 export function Presenter() {
     return (
