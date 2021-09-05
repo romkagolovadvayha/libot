@@ -3,11 +3,16 @@ import HeaderRight from './HeaderRight';
 import HeaderLeft from './HeaderLeft';
 import ST from './styles';
 
-export function Presenter() {
+interface Props {
+    back?: string;
+}
+
+export function Presenter(props: Props) {
+    const {back} = props;
     return (
         <ST.Container>
             <ST.Child>
-                <HeaderLeft/>
+                <HeaderLeft back={back}/>
                 <HeaderRight/>
             </ST.Child>
         </ST.Container>

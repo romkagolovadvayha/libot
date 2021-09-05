@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import Colors from '../../../styles/atoms/colors';
 
 const height = '50px';
-const iconWidth = '20px';
+const iconWidth = '15px';
 const navBorderColor = '#d4d4d4';
 const navColorActive = Colors.Tea;
 const navColorHover = '#c4e2ff';
@@ -23,15 +23,17 @@ const ST = {
         color: #000;
         font-size: 14px;
         text-decoration: none;
-        padding: .5rem 2rem;
+        padding: .5rem 1rem;
         line-height: ${iconWidth};
         display: flex;
         align-items: center;
+        border-right: 1px solid ${navBorderColor};
         > span:first-of-type {
           width: ${iconWidth};
           .icon {
             width: ${iconWidth};
             height: ${iconWidth};
+            margin-top: 3px;
             overflow: hidden;
             fill: #000;
           }

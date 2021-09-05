@@ -3,11 +3,10 @@ import styled from "@emotion/styled";
 import Colors from '../../../styles/atoms/colors';
 
 const height = '50px';
-const iconWidth = '20px';
+const iconWidth = '15px';
 const navBorderColor = '#d4d4d4';
 const navColorActive = Colors.Tea;
 const navColorHover = '#c4e2ff';
-const navBorderColorActive = '#002856';
 
 const ST = {
     List: styled.ul`
@@ -33,6 +32,7 @@ const ST = {
           .icon {
             width: ${iconWidth};
             height: ${iconWidth};
+            margin-top: 3px;
             overflow: hidden;
             fill: #000;
           }

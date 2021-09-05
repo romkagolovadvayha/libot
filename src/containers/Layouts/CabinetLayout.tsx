@@ -15,6 +15,7 @@ interface Props {
     title: string;
     sidebar?: boolean;
     h1?: string;
+    back?: string;
 }
 
 interface ContainerProps {
@@ -56,12 +57,12 @@ const ContentH1 = styled.h1`
 `;
 
 export function CabinetLayout(props: Props) {
-    const {children, authorization, notAuthorize, title, sidebar, h1} = props;
+    const {children, authorization, notAuthorize, title, sidebar, h1, back} = props;
     document.title = title;
     return (
         <Authorization requared={authorization} notAuthorize={notAuthorize}>
             <Container sidebar={sidebar}>
-                <Header/>
+                <Header back={back}/>
                 <Content>
                     {h1 && <ContentH1>{h1}</ContentH1>}
                     <div>

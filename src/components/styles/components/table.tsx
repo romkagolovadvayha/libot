@@ -9,7 +9,10 @@ const Table = {
       min-width: 100%;
       grid-template-columns: 
     50px
-    minmax(150px, 1fr);
+    minmax(150px, 1fr)
+    200px
+    200px
+    150px;
     `,
     Header: styled.thead`
       display: contents;
@@ -39,8 +42,7 @@ const Table = {
     `,
     BodyItemList: styled.tr`
       display: contents;
-
-      &:nth-child(even) td {
+      &:nth-of-type(even) td {
         background: #f8f6ff;
       }
     `,

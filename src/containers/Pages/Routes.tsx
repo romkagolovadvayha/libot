@@ -2,7 +2,8 @@ import React, {ComponentType} from 'react';
 import {RouteComponentProps} from 'react-router-dom';
 
 import {Home} from './Home';
-import {Bots} from './Bots';
+import Bots from './Bots';
+import {AddBot} from './Bots/Add';
 import {Settings} from './Settings';
 import {Support} from './Support';
 import {Profile} from './Profile';
@@ -52,6 +53,11 @@ export const Pages: Array<Route> = [
         link: '/bots',
         code: 'bots',
         component: Bots,
+    },
+    {
+        link: '/bots/add',
+        code: 'addBot',
+        component: AddBot,
     },
     {
         link: '/registration',

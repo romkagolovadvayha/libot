@@ -1,16 +1,22 @@
 import React from 'react';
-import ProfileLink from '../../ProfileLink';
 import ST from "./styles";
 import {NavLink} from "react-router-dom";
 import {ReactSVG} from "react-svg";
 
-export function Presenter() {
+interface Props {
+    back?: string;
+}
 
+export function Presenter(props: Props) {
+    const {back} = props;
     return (
         <ST.List>
-            <ST.Item>
-                {/*<NavLink to='/logout'>Выход</NavLink>*/}
-            </ST.Item>
+            {back && <ST.Item>
+                <NavLink to={back} activeClassName="back-active">
+                    <ReactSVG wrapper="span" src="/images/left-arrow.svg" />
+                    <span>Назад</span>
+                </NavLink>
+            </ST.Item>}
         </ST.List>
     );
 }
