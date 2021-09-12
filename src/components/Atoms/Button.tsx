@@ -1,4 +1,5 @@
 import React from 'react';
+import STButton from '../styles/components/button';
 
 interface Props {
     disabled: boolean;
@@ -11,13 +12,13 @@ export const Button = (props: Props) => {
     const {disabled, children, onClick, className} = props;
 
     return (
-        <button
+        <STButton.Action
             type="submit"
             onClick={onClick}
             disabled={disabled}
             className={className}
         >
             {children}
-        </button>
+        </STButton.Action>
     );
 };

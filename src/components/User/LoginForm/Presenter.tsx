@@ -55,15 +55,15 @@ export function Presenter(props: Props) {
                 {({values, errors, touched, handleChange, handleSubmit, isSubmitting, setFieldValue}) => (
                     <form onSubmit={handleSubmit}>
                         {error && error.length > 0 && <div>{error}</div>}
-                        <Input type="text" autocomplete="off" name="login" handleChange={handleChange} value={values.login} errorText={errors.login} touched={touched.login}/>
-                        <Input type="password" autocomplete="off" name="password" handleChange={handleChange} value={values.password} errorText={errors.password} touched={touched.password}/>
+                        <Input labelText="Логин" type="text" autocomplete="off" name="login" handleChange={handleChange} value={values.login} errorText={errors.login} touched={touched.login}/>
+                        <Input labelText="Пароль" type="password" autocomplete="off" name="password" handleChange={handleChange} value={values.password} errorText={errors.password} touched={touched.password}/>
                         <ReCaptcha
                             sitekey={config.reCaptchaKey}
                             action='submit'
                             verifyCallback={(token: string) => verifyCallback(token, setFieldValue)}
                         />
                         {errors.recaptcha && touched.recaptcha && <div>{errors.recaptcha}</div>}
-                        <Button disabled={isSubmitting}>Вход</Button>
+                        <Button disabled={isSubmitting}>Войти</Button>
                     </form>
                 )}
             </Formik>

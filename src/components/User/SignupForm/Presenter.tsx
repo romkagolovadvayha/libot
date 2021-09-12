@@ -57,10 +57,10 @@ export function Presenter(props: Props) {
                 {({values, errors, touched, handleChange, handleSubmit, isSubmitting, setFieldValue}) => (
                     <form onSubmit={handleSubmit}>
                         {error && error.length > 0 && <div>{error}</div>}
-                        <Input type="text" autocomplete="off" name="login" handleChange={handleChange} value={values.login} errorText={errors.login} touched={touched.login}/>
-                        <Input type="email" name="email" handleChange={handleChange} value={values.email} errorText={errors.email} touched={touched.email}/>
-                        <Input type="text" autocomplete="off" name="fullname" handleChange={handleChange} value={values.fullname} errorText={errors.fullname} touched={touched.fullname}/>
-                        <Input type="password" autocomplete="off" name="password" handleChange={handleChange} value={values.password} errorText={errors.password} touched={touched.password}/>
+                        <Input labelText="Логин" type="text" autocomplete="off" name="login" handleChange={handleChange} value={values.login} errorText={errors.login} touched={touched.login}/>
+                        <Input labelText="E-mail" type="email" name="email" handleChange={handleChange} value={values.email} errorText={errors.email} touched={touched.email}/>
+                        <Input labelText="Полное имя" type="text" autocomplete="off" name="fullname" handleChange={handleChange} value={values.fullname} errorText={errors.fullname} touched={touched.fullname}/>
+                        <Input labelText="Пароль" type="password" autocomplete="off" name="password" handleChange={handleChange} value={values.password} errorText={errors.password} touched={touched.password}/>
                         <ReCaptcha
                             sitekey={config.reCaptchaKey}
                             action='submit'
@@ -70,7 +70,7 @@ export function Presenter(props: Props) {
                         && touched.recaptcha && (
                             <div>{errors.recaptcha}</div>
                         )}
-                        <Button disabled={isSubmitting}>Регистрация</Button>
+                        <Button disabled={isSubmitting}>Зарегистироваться</Button>
                     </form>
                 )}
             </Formik>

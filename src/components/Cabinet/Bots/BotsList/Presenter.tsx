@@ -1,12 +1,17 @@
 import React from 'react';
 import Table from '../../../styles/components/table';
-import {NavLink} from "react-router-dom";
 import {Bot} from '../../../../models/bot';
+import STButton from '../../../styles/components/button';
+import styled from "@emotion/styled";
+import {Button} from "../../../Atoms";
 
 interface Props {
     bots: Bot[];
     getBotsLoader: boolean;
 }
+const AddButton = styled(STButton.LinkAction)`
+  margin-top: .5rem;
+`;
 
 export function Presenter(props: Props) {
     const {bots, getBotsLoader} = props;
@@ -38,7 +43,7 @@ export function Presenter(props: Props) {
                         </Table.BodyItemList>)}
                 </Table.Body>
             </Table.Container>
-            <NavLink to='/bots/add'>Добавить</NavLink>
+            <AddButton to='/bots/add'>Добавить</AddButton>
         </>
     );
 }

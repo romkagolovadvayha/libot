@@ -3,11 +3,19 @@ import {Formik} from "formik";
 import {Button, Input} from "../../../Atoms";
 import ValidateForm from "./ValidateForm";
 import {Redirect} from "react-router";
+import styled from "@emotion/styled";
 
 interface Props {
     addBot: any;
     addBotLoader: boolean;
 }
+
+const Form = styled.form`
+  width: 400px;
+`;
+const ButtonStyle = styled(Button)`
+  margin-top: .5rem;
+`;
 
 export function Presenter(props: Props) {
     const [error, setError] = useState('');
@@ -42,12 +50,12 @@ export function Presenter(props: Props) {
                 onSubmit={(values, {setSubmitting}) => handlerSubmit(values, setSubmitting)}
             >
                 {({values, errors, touched, handleChange, handleSubmit, isSubmitting, setFieldValue}) => (
-                    <form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleSubmit}>
                         {error && error.length > 0 && <div>{error}</div>}
-                        <Input type="text" autocomplete="off" name="name" handleChange={handleChange} value={values.name} errorText={errors.name} touched={touched.name}/>
-                        <Input type="text" autocomplete="off" name="apiKey" handleChange={handleChange} value={values.apiKey} errorText={errors.apiKey} touched={touched.apiKey}/>
-                        <Button disabled={isSubmitting}>Добавить</Button>
-                    </form>
+                        <Input type="text" autocomplete="off" name="name" handleChange={handleChange} value={values.name} labelText="Название" errorText={errors.name} touched={touched.name}/>
+                        <Input type="text" autocomplete="off" name="apiKey" handleChange={handleChange} value={values.apiKey} labelText="Api ключ geitio" errorText={errors.apiKey} touched={touched.apiKey}/>
+                        <ButtonStyle disabled={isSubmitting}>Добавить</ButtonStyle>
+                    </Form>
                 )}
             </Formik>
         </>
